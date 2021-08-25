@@ -18,6 +18,7 @@ import { Card, CardImg, CardText, CardBody,
 
 
         function RenderDish({dish}) {
+         console.log('Dishdetail Component render dish invoked');
                 if (dish != null)
                     return (
                         <Card className="col-12 col-md-5 m-1">
@@ -33,12 +34,14 @@ import { Card, CardImg, CardText, CardBody,
                         <div></div>
                     );
             }
-            function RenderComments({array}) {
-                if (array.length !== 0) {
+            function RenderComments({comments}) {
+            console.log('Dishdetail Component render comments invoked');
+                if (comments !=  null) {
+                    console.log('Dishdetail Component renderComments not null invoked');
                     return (
                         <div className="col-12 col-md-5 m-1">
                             <h4>Comments</h4>
-                            {array.map(comment => (
+                            {comments.map(comment => (
                                 <ul className="list-unstyled">
                                     <li>
                                         <p>{comment.comment}</p>
@@ -60,22 +63,19 @@ import { Card, CardImg, CardText, CardBody,
 
             const Dishdetail = (props) => {
             console.log('Dishdetail Component render invoked');
-                let dish;
-                if (props.selectedDish) {
-                    dish = (
+                if (props.dish != null) {
                         <div class = "container">
                         <div className="row">
-                            <RenderDish dish = {props.selectedDish}/>
-                            <RenderComments comments = {props.selectedDish.comments}/>
+                            <RenderDish dish = {props.dish}/>
+                            <RenderComments comments = {props.dish.comments}/>
                         </div>
                         </div>
-                    )
                 } else {
-                    dish = <div></div>
+                   <div></div>
                 }
                 return (
                     <div className="container">
-                        {dish}
+
                     </div>
                 );
             }
