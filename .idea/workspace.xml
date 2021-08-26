@@ -11,10 +11,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="992578b5-228a-476f-99a9-f0e261d5d57c" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/components/AboutComponent.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/redux/configureStore.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/redux/reducer.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/components/ContactComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ContactComponent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/MainComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MainComponent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/HeaderComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/HeaderComponent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
