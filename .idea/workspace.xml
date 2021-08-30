@@ -11,8 +11,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="992578b5-228a-476f-99a9-f0e261d5d57c" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/shared/baseUrl.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/components/ContactComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/ContactComponent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/DishdetailComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/DishdetailComponent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/HomeComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/HomeComponent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/components/MainComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/components/MainComponent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,13 +81,13 @@
       <screen x="0" y="0" width="1280" height="688" />
     </state>
     <state x="142" y="0" key="SettingsEditor/0.0.1280.688@0.0.1280.688" timestamp="1629812402670" />
-    <state x="347" y="48" width="587" height="592" key="find.popup" timestamp="1630002022379">
+    <state x="347" y="48" width="587" height="592" key="find.popup" timestamp="1630337510390">
       <screen x="0" y="0" width="1280" height="688" />
     </state>
-    <state x="347" y="48" width="587" height="592" key="find.popup/0.0.1280.688@0.0.1280.688" timestamp="1630002022379" />
-    <state x="303" y="9" width="672" height="678" key="search.everywhere.popup" timestamp="1629989315258">
+    <state x="347" y="48" width="587" height="592" key="find.popup/0.0.1280.688@0.0.1280.688" timestamp="1630337510390" />
+    <state x="303" y="9" width="672" height="678" key="search.everywhere.popup" timestamp="1630330724873">
       <screen x="0" y="0" width="1280" height="688" />
     </state>
-    <state x="303" y="9" width="672" height="678" key="search.everywhere.popup/0.0.1280.688@0.0.1280.688" timestamp="1629989315258" />
+    <state x="303" y="9" width="672" height="678" key="search.everywhere.popup/0.0.1280.688@0.0.1280.688" timestamp="1630330724873" />
   </component>
 </project>

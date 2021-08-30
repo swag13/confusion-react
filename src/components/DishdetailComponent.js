@@ -1,26 +1,116 @@
-import React from 'react';
+import React,{ Component } from 'react';
 //import { Media } from 'reactstrap';
 import { Card, CardImg, CardText, CardBody,
-    CardTitle, Breadcrumb, BreadcrumbItem } from 'reactstrap';
+    CardTitle, Breadcrumb, BreadcrumbItem, Button, Modal, ModalHeader, ModalBody, ModalFooter, Row, Col, Label } from 'reactstrap';
 import { Link } from 'react-router-dom';
+import { Control, LocalForm, Errors } from 'react-redux-form';
+
+
+const required =(val) =>val&&val.length;
+const maxLength = (len)=>(val)=>!(val)||(val.length<=len)
+const minLength = (len)=>(val)=>(val)&&(val.length>=len)
+
+class CommentForm extends Component {
+    constructor(props) {
+       super(props);
+        this.state = {
+                        isModalOpen: false
+                      };
+        this.handleToggle = this.handleToggle.bind(this);
+        this.handleSubmit = this.handleSubmit.bind(this);
+    }
+    handleToggle=()=> {
+       this.setState({
+       isModalOpen: !this.state.isModalOpen
+       });
+    }
+    handleSubmit=(values)=> {
+             console.log('Dishdetail Component submit handle invoked');
+              console.log("Current State is: " + JSON.stringify(values));
+               alert("Current State is: " + JSON.stringify(values));
+    }
+
+     render() {
+            return (
+                 <React.Fragment>
+                            <Button onClick={this.handleToggle}><i className="fa fa-pencil"></i>{' '}Submit Comment</Button>
+                            <Modal isOpen={this.state.isModalOpen} toggle={this.handleToggle}>
+                                <ModalHeader toggle={this.handleToggle}>
+                                    Submit Comment
+                                </ModalHeader>
+                                <ModalBody>
+                                 <LocalForm onSubmit={(value)=>this.handleSubmit(value)}>
+                                                     <Row className="form-group">
+                                                                 <Label htmlFor="rating" md={4}>Rating</Label>
+                                                                 <Col md={12}>
+                                                                     <Control.select model=".rating" id="rating" name="rating"
+                                                                         className="form-control">
+                                                                          <option>1</option>
+                                                                          <option>2</option>
+                                                                          <option>3</option>
+                                                                          <option>4</option>
+                                                                          <option>5</option>
+                                                                     </Control.select>
+                                                                 </Col>
+                                                     </Row>
+                                                     <Row className="form-group">
+                                                                 <Label htmlFor="author" md={4}>Your Name</Label>
+                                                                 <Col md={12}>
+                                                                     <Control.text model=".author" id="author" name="author"
+                                                                         placeholder="Your Name"
+                                                                         className="form-control"
+                                                                         validators={{
+                                                                             minLength: minLength(3), maxLength: maxLength(15)
+                                                                         }}
+                                                                          />
+                                                                     <Errors
+                                                                         className="text-danger"
+                                                                         model=".author"
+                                                                         show="touched"
+                                                                         messages={{
+                                                                             minLength: 'Must be greater than 2 characters',
+                                                                             maxLength: 'Must be 15 characters or less'
+                                                                         }}
+                                                                      />
+                                                                 </Col>
+                                                             </Row>
+                                                             <Row className="form-group">
+                                                                 <Label htmlFor="comment" md={4}>Comment</Label>
+                                                                 <Col md={12}>
+                                                                     <Control.textarea model=".comment" id="comment" name="comment"
+                                                                         className="form-control"
+                                                                         validators={{
+                                                                             required
+                                                                         }}
+                                                                         rows="6"
+                                                                          />
+                                                                     <Errors
+                                                                         className="text-danger"
+                                                                         model=".comment"
+                                                                         show="touched"
+                                                                         messages={{
+                                                                             required:'Comment Required'
+                                                                         }}
+                                                                      />
+                                                                 </Col>
+                                                             </Row>
+                                                             <Row className="form-group">
+                                                             <Col >
+                                                                 <Button type="submit" color="primary" >Submit</Button>
+                                                             </Col>
+                                                             </Row>
+                                                     </LocalForm>
+                                                 </ModalBody>
+                                             </Modal>
+                                             </React.Fragment>
+
+                         );
+                    }
+                }
 
 
 
-        /* constructor(props) {
-                 super(props);
-
-                 this.state = {
-                     selectedDish: null
-                 }
-             }*/
-
-         /*onDishSelect(dish) {
-                 this.setState({ selectedDish: dish});
-             }*/
-
-
-        function RenderDish({dish}) {
-         console.log('Dishdetail Component render dish invoked');
+        const RenderDish = ({dish, comments}) =>  {
                 if (dish != null)
                     return (
                         <Card className="col-12 col-md-5 m-1">
@@ -36,73 +126,63 @@ import { Link } from 'react-router-dom';
                         <div></div>
                     );
             }
-            function RenderComments({comments}) {
-            console.log('Dishdetail Component render comments invoked');
+           const RenderComments =({comments,dishId}) =>{
+
                 if (comments !=  null) {
-                    console.log('Dishdetail Component renderComments not null invoked');
-                    return (
-                        <div className="col-12 col-md-5 m-1">
-                            <h4>Comments</h4>
-                            {comments.map(comment => (
+                 const comment = comments.map(commentItem=>{
+
+                                    return(
+                                    <div>
+                                    <li>{commentItem.comment}</li><br />
+                                    <li>-- {commentItem.author}, {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(commentItem.date)))}</li><br />
+                                    </div>
+                                )
+
+                                }
+                                );
+                            return(
                                 <ul className="list-unstyled">
-                                    <li>
-                                        <p>{comment.comment}</p>
-                                        <p>-- {comment.author} , {new Intl.DateTimeFormat('en-US', { year: 'numeric', month: 'short', day: '2-digit'}).format(new Date(Date.parse(comment.date)))}</p>
-                                    </li>
+                                <div>
+                                {comment}
+                                </div>
+                                <CommentForm dishId={dishId} />
                                 </ul>
+
                             )
-                            )}
-                        </div>
-                    );
-                }
-                else {
-                    return (
-                        <div></div>
-                    );
+                        }
+                        else{
+                            return(<div></div>)
+                        }
+                    }
 
-                }
-            }
 
-            const Dishdetail = (props) => {
-            console.log('Dishdetail Component render invoked');
-                if (props.dish != null) {return (
-                                                         <div className="container">
+            const Dishdetail = ({dish,comments}) => {
+                if (dish != null) {return (
+                                                         <LocalForm>
                                                          <div className="row">
                                                              <Breadcrumb>
                                                                  <BreadcrumbItem><Link to="/menu">Menu</Link></BreadcrumbItem>
-                                                                 <BreadcrumbItem active>{props.dish.name}</BreadcrumbItem>
+                                                                 <BreadcrumbItem active>{dish.name}</BreadcrumbItem>
                                                              </Breadcrumb>
                                                              <div className="col-12">
-                                                                 <h3>{props.dish.name}</h3>
+                                                                 <h3>{dish.name}</h3>
                                                                  <hr />
                                                              </div>
                                                          </div>
                                                          <div className="row">
                                                              <div className="col-12 col-md-5 m-1">
-                                                                 <RenderDish dish={props.dish} />
+                                                                 <RenderDish dish={dish} comments={comments}/>
                                                              </div>
                                                              <div className="col-12 col-md-5 m-1">
-                                                                 <RenderComments comments={props.comments} />
+                                                                 <RenderComments comments={comments} dishId={dish.id}/>
                                                              </div>
+
+
                                                          </div>
-                                                         </div>
+                                                         </LocalForm>
                                                      );
                                                      }
 
                                                     }
 
          export default Dishdetail;
-
-        /* render() {
-         console.log('Dishdetail Component render invoked');
-         if (this.props.dish != null)
-            return (
-                <div class = "container">
-                <div className="row">
-                    {this.renderDish(this.props.dish)}
-                    {this.renderComments(this.props.dish.comment)}
-                </div>
-                </div>
-
-            )
-         }*/
