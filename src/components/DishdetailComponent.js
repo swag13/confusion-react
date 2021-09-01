@@ -4,6 +4,7 @@ import { Card, CardImg, CardText, CardBody,
     CardTitle, Breadcrumb, BreadcrumbItem, Button, Modal, ModalHeader, ModalBody, ModalFooter, Row, Col, Label } from 'reactstrap';
 import { Link } from 'react-router-dom';
 import { Control, LocalForm, Errors } from 'react-redux-form';
+import { Loading } from './LoadingComponent';
 
 
 const required =(val) =>val&&val.length;
@@ -26,8 +27,7 @@ class CommentForm extends Component {
     }
     handleSubmit=(values)=> {
              console.log('Dishdetail Component submit handle invoked');
-              console.log("Current State is: " + JSON.stringify(values));
-               alert("Current State is: " + JSON.stringify(values));
+              this.props.addComment(this.props.dishId, values.rating, values.author, values.comment);
     }
 
      render() {
@@ -126,7 +126,7 @@ class CommentForm extends Component {
                         <div></div>
                     );
             }
-           const RenderComments =({comments,dishId}) =>{
+           const RenderComments =({comments,addComment,dishId}) =>{
 
                 if (comments !=  null) {
                  const comment = comments.map(commentItem=>{
@@ -145,7 +145,7 @@ class CommentForm extends Component {
                                 <div>
                                 {comment}
                                 </div>
-                                <CommentForm dishId={dishId} />
+                                <CommentForm dishId={dishId} addComment={addComment}/>
                                 </ul>
 
                             )
@@ -156,8 +156,26 @@ class CommentForm extends Component {
                     }
 
 
-            const Dishdetail = ({dish,comments}) => {
-                if (dish != null) {return (
+            const Dishdetail = ({props, dish,comments, addComment}) => {
+                if (props.isLoading) {
+                    return(
+                        <div className="container">
+                            <div className="row">            
+                                <Loading />
+                            </div>
+                        </div>
+                    );
+                }
+                else if (props.errMess) {
+                    return(
+                        <div className="container">
+                            <div className="row">            
+                                <h4>{props.errMess}</h4>
+                            </div>
+                        </div>
+                    );
+                }
+                else if (dish != null) {return (
                                                          <LocalForm>
                                                          <div className="row">
                                                              <Breadcrumb>
@@ -174,7 +192,8 @@ class CommentForm extends Component {
                                                                  <RenderDish dish={dish} comments={comments}/>
                                                              </div>
                                                              <div className="col-12 col-md-5 m-1">
-                                                                 <RenderComments comments={comments} dishId={dish.id}/>
+                                                                 <RenderComments comments={comments} dishId={dish.id}
+                                                                    addComment={addComment}/>
                                                              </div>
 
 
