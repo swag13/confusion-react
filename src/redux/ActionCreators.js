@@ -12,7 +12,6 @@ export const addComment = (comment)=>
         }
     )
 }
-
 export const postComment = (dishId,rating,author,comment)=>(dispatch)=>
 {
 const newComment ={
@@ -223,7 +222,7 @@ export const addLeaders = (leaders)=>(
                 payload:leaders
         }
 )
-/*********************** */
+
 
 export const postFeedback = (value)=>
 {
